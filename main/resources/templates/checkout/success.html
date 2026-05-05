@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt hàng thành công</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .top-nav {
+            background-color: #333;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .top-nav a:hover {
+            color: #4CAF50;
+        }
+        .success-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .success-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .success-container h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .success-container p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        .btn-secondary {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-nav">
+        <a href="/">Trang chủ</a>
+        <a href="/products">Danh sách sản phẩm</a>
+    </div>
+
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1>Đặt hàng thành công!</h1>
+        <p>
+            Cảm ơn bạn đã đặt hàng.<br>
+            Đơn hàng của bạn đã được tạo thành công và sẽ được xử lý trong thời gian sớm nhất.<br>
+            Vui lòng kiểm tra email của bạn để nhận thông tin chi tiết về đơn hàng.
+        </p>
+        <div class="action-buttons">
+            <a href="/products" class="btn btn-primary">Tiếp tục mua sắm</a>
+            <a href="/" class="btn btn-secondary">Về trang chủ</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

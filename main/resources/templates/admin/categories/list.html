@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh mục</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .top-nav {
+            background-color: #333;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .top-nav a:hover {
+            color: #4CAF50;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .add-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+        .message {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .categories-table {
+            width: 100%;
+            background-color: white;
+            border-collapse: collapse;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .categories-table th {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .categories-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .categories-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .edit-btn {
+            background-color: #5cb85c;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+        .edit-btn:hover {
+            background-color: #4cae4c;
+        }
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .delete-btn:hover {
+            background-color: #c9302c;
+        }
+        .no-data {
+            background-color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 5px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-nav">
+        <a href="/">Trang chủ</a>
+        <a href="/admin/categories">Quản lý danh mục</a>
+        <a href="/admin/products">Quản lý sản phẩm</a>
+        <a href="/admin/dashboard">Dashboard</a>
+    </div>
+
+    <div class="header">
+        <h1>Quản lý danh mục</h1>
+        <a href="/admin/categories/create" class="add-btn">+ Thêm danh mục</a>
+    </div>
+
+    <div th:if="${success}" class="message success" th:text="${success}"></div>
+    <div th:if="${error}" class="message error" th:text="${error}"></div>
+
+    <table class="categories-table" th:if="${categories.size() > 0}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên danh mục</th>
+            <th>Mô tả</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.id}"></td>
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td>
+                <div class="action-buttons">
+                    <a href="#" th:href="@{/admin/categories/{id}/edit(id=${category.id})}" class="edit-btn">Sửa</a>
+                    <form method="post" th:action="@{/admin/categories/{id}/delete(id=${category.id})}" style="display: inline;">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${categories.size() == 0}" class="no-data">
+        <p>Chưa có danh mục nào</p>
+    </div>
+</div>
+</body>
+</html>
+

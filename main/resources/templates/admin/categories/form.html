@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${category.id != null ? 'Sửa danh mục' : 'Thêm danh mục'}"></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .top-nav {
+            background-color: #333;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .top-nav a:hover {
+            color: #4CAF50;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .submit-btn {
+            flex: 1;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .cancel-btn {
+            flex: 1;
+            padding: 12px;
+            background-color: #999;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+        .cancel-btn:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-nav">
+        <a href="/">Trang chủ</a>
+        <a href="/admin/categories">Quản lý danh mục</a>
+        <a href="/admin/products">Quản lý sản phẩm</a>
+        <a href="/admin/dashboard">Dashboard</a>
+    </div>
+
+    <div class="header">
+        <h1 th:text="${category.id != null ? 'Sửa danh mục' : 'Thêm danh mục mới'}"></h1>
+    </div>
+
+    <div class="form-container">
+        <form th:if="${category.id != null}" method="post" th:action="@{/admin/categories/{id}/update(id=${category.id})}">
+            <div class="form-group">
+                <label for="name">Tên danh mục *</label>
+                <input type="text" id="name" name="name" th:value="${category.name}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description" th:text="${category.description}"></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Cập nhật</button>
+                <a href="/admin/categories" class="cancel-btn">Hủy</a>
+            </div>
+        </form>
+
+        <form th:if="${category.id == null}" method="post" action="/admin/categories/save">
+            <div class="form-group">
+                <label for="name-create">Tên danh mục *</label>
+                <input type="text" id="name-create" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description-create">Mô tả</label>
+                <textarea id="description-create" name="description"></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Thêm</button>
+                <a href="/admin/categories" class="cancel-btn">Hủy</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
