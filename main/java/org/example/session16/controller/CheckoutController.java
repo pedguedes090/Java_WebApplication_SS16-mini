@@ -64,7 +64,6 @@ public class CheckoutController {
                 return "redirect:/cart";
             }
 
-            // Gọi service tạo đơn (KHÔNG dùng User)
             orderService.createOrder(
                     name,
                     email,
